@@ -4,15 +4,6 @@ import {TouchableOpacity, PermissionsAndroid, Alert} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import FileViewer from 'react-native-file-viewer';
-import {
-  writeFile,
-  readFile,
-  stat,
-  readDir,
-  MainBundlePath,
-  DownloadDirectoryPath,
-  DocumentDirectoryPath,
-} from 'react-native-fs';
 
 const data = {
   name: '123123123',
@@ -201,9 +192,6 @@ const PdfScreen = () => {
           style={styles.ImageStyle}
         />
         <Text style={styles.text}>Create PDF</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={openFile}>
-        <Text style={styles.text}>open PDF</Text>
       </TouchableOpacity>
     </View>
   );

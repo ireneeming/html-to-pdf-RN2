@@ -16,12 +16,7 @@ import {
   Alert,
   PermissionsAndroid,
 } from 'react-native';
-import {
-  writeFile,
-  readFile,
-  DownloadDirectoryPath,
-  DocumentDirectoryPath,
-} from 'react-native-fs';
+import {writeFile, readFile, DownloadDirectoryPath} from 'react-native-fs';
 import XLSX from 'xlsx';
 
 const CsvScreen = () => {
@@ -29,8 +24,8 @@ const CsvScreen = () => {
     let sample_data_to_export = [
       {
         id: '1',
-        contentName: 'name1',
-        contents: 'hmmm',
+        contentName: '스트링',
+        contents: 'english',
       },
       {
         id: '2',
@@ -47,10 +42,10 @@ const CsvScreen = () => {
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.json_to_sheet(sample_data_to_export);
     XLSX.utils.book_append_sheet(wb, ws, 'Users');
-    const wbout = XLSX.write(wb, {type: 'binary', bookType: 'xlsx'});
+    const file = XLSX.write(wb, {type: 'string', bookType: 'csv'});
 
     // Write generated excel to Storage
-    writeFile(DocumentDirectoryPath + '/testCSVtest3.csv', wbout, 'ascii')
+    writeFile(DownloadDirectoryPath + '/string2.csv', file, 'utf8')
       .then(res => {
         alert('Export Data Successfully..!');
       })
@@ -85,7 +80,7 @@ const CsvScreen = () => {
       requestExternalWritePermission();
     } else {
       createCSV();
-      alert('IOS saved?', DocumentDirectoryPath);
+      alert('IOS saved?');
     }
   };
 
