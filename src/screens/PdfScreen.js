@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image} from 'react-native';
 import {TouchableOpacity, PermissionsAndroid, Alert} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
@@ -18,7 +18,7 @@ const data = {
   name: '123123123',
   address: '101 E. Chapman Ave<br>Orange, CA 92866',
   phone: '98273-***11',
-  company: 'Xyz Company',
+  company: '123 Company',
   amount: '46899.50',
   amt: '53100.50',
 };
@@ -114,6 +114,7 @@ const PdfScreen = () => {
             </body>
           </html>
         `;
+
   const askPermission = () => {
     async function requestExternalWritePermission() {
       try {
@@ -145,75 +146,35 @@ const PdfScreen = () => {
       //Content to print
       html: htmlContent,
       //File Name
-      fileName: 'my-test22222',
+      fileName: 'omgplease2',
       //File directory
-      directory: 'Download',
-      base64: true,
+      directory: '',
+      // base64: true,
     };
 
     let file = await RNHTMLtoPDF.convert(options);
 
-    // console.log(file.filePath);
+    console.log(file.filePath);
     Alert.alert(
       'Successfully Exported',
       'Path:' + file.filePath,
       [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Open', onPress: () => openFile(file.filePath)},
-        {
-          text: 'Save',
-          onPress: () => {
-            let path = DownloadDirectoryPath + '/' + options.fileName + '.pdf';
-            writeFile(path, file, 'utf8')
-              .then(res => {
-                alert('successsssss');
-                console.log('open directly');
-              })
-              .catch(e => {
-                console.log('Error writeFile', e);
-              });
-          },
-        },
-      ],
-      {cancelable: true},
-    );
-  };
-
-  const createPDFIos = async () => {
-    let options = {
-      //Content to print
-      html: htmlContent,
-      //File Name
-      fileName: 'my-test2',
-      //File directory
-      directory: 'Documents',
-      base64: true,
-    };
-
-    let file = await RNHTMLtoPDF.convert(options);
-
-    // console.log(file.filePath);
-    Alert.alert(
-      'Successfully Exported',
-      'Path:' + file.filePath,
-      [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Open', onPress: () => openFile(file.filePath)},
-        {
-          text: 'Save',
-          onPress: () => {
-            console.log(DocumentDirectoryPath);
-            let path = DownloadDirectoryPath + '/' + options.fileName + '.pdf';
-            writeFile(path, file, 'utf8')
-              .then(res => {
-                alert('successsssss');
-                console.log('open directly');
-              })
-              .catch(e => {
-                console.log('Error writeFile', e);
-              });
-          },
-        },
+        {text: 'OK', style: 'OK'},
+        // {text: 'Open', onPress: () => openFile(file.filePath)},
+        // {
+        //   text: 'Save',
+        //   onPress: () => {
+        //     let path = file.filePath;
+        //     writeFile(path, file, 'utf8')
+        //       .then(res => {
+        //         alert('successsssss');
+        //         console.log('open directly', path);
+        //       })
+        //       .catch(e => {
+        //         console.log('Error writeFile', e);
+        //       });
+        //   },
+        // },
       ],
       {cancelable: true},
     );
